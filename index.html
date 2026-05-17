@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Pre-lanzamiento | Equipo de Élite</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a0f1e 0%, #0c1222 100%);
+      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    /* Contenedor principal */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(2px);
+      border-radius: 3rem;
+      padding: 2rem 1.5rem 3rem;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Título principal */
+    .prelaunch-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .prelaunch-title h1 {
+      font-size: 2.4rem;
+      background: linear-gradient(135deg, #FFD966, #FFB347, #FF8C42);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      letter-spacing: -0.5px;
+    }
+    .prelaunch-title p {
+      color: #FFD966;
+      font-weight: 600;
+      background: rgba(0,0,0,0.5);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      margin-top: 0.75rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* contenedor video + contador */
+    .video-countdown-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-box {
+      flex: 2;
+      min-width: 280px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,215,0,0.3);
+      background: #000;
+    }
+    .video-box iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
+      border: none;
+    }
+
+    /* tarjeta contador */
+    .countdown-card {
+      flex: 1.2;
+      background: rgba(10, 20, 30, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(255,200,100,0.5);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    .countdown-label {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #FFE6B0, #FFB347);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .timer {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .time-block {
+      background: #000000aa;
+      backdrop-filter: blur(4px);
+      border-radius: 20px;
+      padding: 0.7rem 0.2rem;
+      flex: 1;
+      min-width: 60px;
+      border-bottom: 3px solid #FFB347;
+    }
+    .time-number {
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #FFD966;
+      line-height: 1;
+      letter-spacing: 2px;
+    }
+    .time-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #ccc;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+    .launch-message {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #FFE0A3;
+      background: rgba(0,0,0,0.5);
+      border-radius: 60px;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    /* Área de beneficios + CTA */
+    .benefits {
+      margin: 2rem 0 2rem;
+    }
+    .card-highlight {
+      background: linear-gradient(145deg, rgba(20,30,45,0.9), rgba(0,0,0,0.6));
+      border-radius: 2rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(255,180,70,0.4);
+      transition: transform 0.2s ease;
+    }
+    .card-highlight h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #FFCF7A;
+      margin-bottom: 0.5rem;
+    }
+    .sub-badge {
+      background: #FF6600;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .feature-list {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 1.5rem 0;
+    }
+    .feature {
+      flex: 1;
+      background: rgba(0,0,0,0.4);
+      padding: 0.8rem;
+      border-radius: 1.2rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .btn-register {
+      display: block;
+      width: 100%;
+      background: linear-gradient(95deg, #FF8800, #FF5500);
+      border: none;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: white;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      text-decoration: none;
+      font-family: inherit;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+      margin-top: 1rem;
+    }
+    .btn-register:hover {
+      transform: scale(1.02);
+      background: linear-gradient(95deg, #FFaa33, #FF7722);
+      box-shadow: 0 12px 22px black;
+    }
+    .fine-print {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 780px) {
+      .container { padding: 1rem; }
+      .prelaunch-title h1 { font-size: 1.8rem; }
+      .time-number { font-size: 1.6rem; }
+      .btn-register { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="prelaunch-title">
+    <h1>🚀 En Pre-lanzamiento · Comenzamos el 29 de Mayo 🚀</h1>
+    <p>⚡ Únete antes de que se active tu equipo automático ⚡</p>
+  </div>
+
+  <div class="video-countdown-wrapper">
+    <!-- Video de YouTube con redirección automática (3 segundos antes del final) -->
+    <div class="video-box">
+      <div id="youtube-player"></div>
+    </div>
+
+    <!-- Contador interactivo -->
+    <div class="countdown-card">
+      <div class="countdown-label">⏳ LANZAMIENTO EN ⏳</div>
+      <div class="timer">
+        <div class="time-block"><div class="time-number" id="days">00</div><div class="time-label">DÍAS</div></div>
+        <div class="time-block"><div class="time-number" id="hours">00</div><div class="time-label">HORAS</div></div>
+        <div class="time-block"><div class="time-number" id="minutes">00</div><div class="time-label">MINUTOS</div></div>
+        <div class="time-block"><div class="time-number" id="seconds">00</div><div class="time-label">SEGUNDOS</div></div>
+      </div>
+      <div class="launch-message">
+        🎯 Fecha objetivo: 29 de Mayo de 2026 - 00:00:00 🎯
+      </div>
+    </div>
+  </div>
+
+  <div class="benefits">
+    <div class="card-highlight">
+      <div class="sub-badge">🔥 OFERTA PRE-LANZAMIENTO 🔥</div>
+      <h3>💰 TE CONSTRUIMOS TU DOWNLINE ANTES DE PAGAR</h3>
+      <p style="color:#E0E0E0; margin: 0.8rem 0;">Trabajamos en equipos de 5 personas. Cada miembro arrastra su red, ¡y tú recibes beneficio inmediato!</p>
+      <div class="feature-list">
+        <div class="feature">✅ Cupo limitado por equipo</div>
+        <div class="feature">✅ Sin pago inicial</div>
+        <div class="feature">✅ Tu downline crece gratis</div>
+      </div>
+      <a href="https://bulletproofmatrix.com/Jobs" class="btn-register" id="registerBtn">🎯 RECLAMA TU SPOT GRATIS →</a>
+      <p style="font-size: 0.8rem; text-align: center; margin-top: 0.8rem;">*Plazas asignadas por orden de llegada. Solo 5 por escuadrón.</p>
+    </div>
+  </div>
+  <div class="fine-print">
+    © 2026 · Equipo Elite · Sin compromiso. Construimos tu downline previo a cualquier inversión.
+  </div>
+</div>
+
+<script>
+  // 1. CONTADOR REGRESIVO: 29 de Mayo 2026 (medianoche zona horaria local)
+  function startCountdown() {
+    const targetDate = new Date('May 29, 2026 00:00:00').getTime();
+
+    function updateClock() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        // cuando se alcanza la fecha
+        document.getElementById('days').innerText = '00';
+        document.getElementById('hours').innerText = '00';
+        document.getElementById('minutes').innerText = '00';
+        document.getElementById('seconds').innerText = '00';
+        clearInterval(countdownInterval);
+        // opcional: mostrar mensaje "YA ACTIVADO"
+        const msgDiv = document.querySelector('.launch-message');
+        if(msgDiv) msgDiv.innerHTML = '🎉 ¡YA ESTAMOS ACTIVOS! RELLENA TU SPOT YA 🎉';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (86400000)) / (3600000));
+      const minutes = Math.floor((distance % 3600000) / 60000);
+      const seconds = Math.floor((distance % 60000) / 1000);
+
+      document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+      document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+      document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+
+    updateClock();
+    const countdownInterval = setInterval(updateClock, 1000);
+  }
+
+  startCountdown();
+
+  // 2. YouTube API: cargar video + redirigir 3 segundos antes de terminar
+  let player;
+  let redirectExecuted = false;   // evitar doble redirección
+  let timerCheck;                 // guardar intervalo
+
+  // Esta función es llamada automáticamente cuando la API de YouTube está lista
+  window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('youtube-player', {
+      videoId: 'MklM-yVofWc',      // ID del video de presentación
+      width: '100%',
+      height: '100%',
+      playerVars: {
+        'autoplay': 0,             // (opcional) se puede cambiar a 1 si deseas autoplay
+        'modestbranding': 1,
+        'rel': 0,
+        'controls': 1,
+        'enablejsapi': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  };
+
+  function onPlayerReady(event) {
+    console.log("Video listo para reproducirse.");
+  }
+
+  function onPlayerStateChange(event) {
+    // Cuando el video está en reproducción, activamos monitoreo de tiempo
+    if (event.data === YT.PlayerState.PLAYING) {
+      startCheckTimeRemaining();
+    }
+    // Si el video termina (ENDED) y por alguna razón no se hizo la redirección, la forzamos
+    if (event.data === YT.PlayerState.ENDED && !redirectExecuted) {
+      forceRedirect();
+    }
+  }
+
+  function startCheckTimeRemaining() {
+    if (timerCheck) clearInterval(timerCheck);
+    timerCheck = setInterval(function() {
+      if (!player || redirectExecuted) return;
+      const duration = player.getDuration();       // duración total en segundos
+      const current = player.getCurrentTime();    // tiempo actual
+
+      if (duration && current >= 0 && (duration - current) <= 3.0 && !redirectExecuted) {
+        // Faltan 3 segundos o menos para terminar
+        redirectExecuted = true;
+        clearInterval(timerCheck);
+        // Redirigir al enlace de registro https://bulletproofmatrix.com/Jobs
+        window.location.href = 'https://bulletproofmatrix.com/Jobs';
+      }
+    }, 200); // se revisa cada 200ms para ser preciso
+  }
+
+  function forceRedirect() {
+    if (!redirectExecuted) {
+      redirectExecuted = true;
+      if (timerCheck) clearInterval(timerCheck);
+      window.location.href = 'https://bulletproofmatrix.com/Jobs';
+    }
+  }
+
+  // Cargar la API de YouTube de forma asíncrona
+  function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
+
+  loadYouTubeAPI();
+
+  // (Opcional) También forzamos que si el usuario intenta dar click al botón, no haya conflicto,
+  // pero el comportamiento principal es redirigir automático al final del video.
+  // Además agregamos protección para que si el video no carga o hay error, igual redirigir tras X tiempo ? opcional
+  // pero para no complicar, la redirección por falta de API no interfiere.
+
+  // Por si el script tarda o hay algún error, aseguramos que el botón sí lleva al link.
+  // El botón ya tiene href directo, no hay necesidad adicional.
+</script>
+
+</body>
+</html>

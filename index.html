@@ -169,6 +169,20 @@
       color: #aaa;
       margin-top: 2rem;
     }
+    
+    /* Disclaimer adicional */
+    .disclaimer {
+      text-align: center;
+      font-size: 0.65rem;
+      color: #888;
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      line-height: 1.4;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     /* BOTÓN GAMING FIJO (FLOTANTE) */
     .cta-gaming {
@@ -220,6 +234,9 @@
         bottom: 15px;
         right: 15px;
       }
+      .disclaimer {
+        font-size: 0.55rem;
+      }
     }
   </style>
 </head>
@@ -259,9 +276,14 @@
     </div>
   </div>
 
-  <!-- PIE DE PÁGINA ACTUALIZADO con el nuevo texto -->
+  <!-- PIE DE PÁGINA PRINCIPAL -->
   <div class="fine-print">
     © 2026 · aiviraljobs · Por tiempo de prelanzamiento te ayudamos a crear tu equipo antes de activarte
+  </div>
+
+  <!-- DISCLAIMER LEGAL TRADUCIDO -->
+  <div class="disclaimer">
+    <strong>Descargo de responsabilidad sobre ingresos:</strong> Los ejemplos de ingresos y el potencial de ganancias mostrados en esta página son solo para fines educativos e ilustrativos. Los resultados no están garantizados. Los resultados individuales variarán según el esfuerzo, la habilidad, el momento, las condiciones del mercado y la actividad personal. Bullet Proof Matrix no es un programa de “hágase rico rápidamente”. Construir ingresos residuales requiere trabajo constante, promoción y participación activa.
   </div>
 </div>
 
@@ -309,10 +331,10 @@
 
   startCountdown();
 
-  // 2. YouTube API: redirige al FORMULARIO DE GOOGLE
+  // 2. YouTube API: redirige al FORMULARIO DE GOOGLE (más fiable con setTimeout)
   let player;
   let redirectExecuted = false;
-  let timerCheck;
+  let redirectTimeout = null;
   const GOOGLE_FORM_URL = 'https://forms.gle/59QxZWKhCWRUjL9D7';
 
   window.onYouTubeIframeAPIReady = function() {
@@ -335,36 +357,44 @@
   };
 
   function onPlayerReady(event) {
-    console.log("Video listo para reproducirse.");
+    console.log("✅ Video listo. Duración total: " + event.target.getDuration() + " segundos");
   }
 
   function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-      startCheckTimeRemaining();
+    if (event.data === YT.PlayerState.PLAYING && !redirectExecuted) {
+      const duration = player.getDuration();
+      console.log("▶️ Video en reproducción. Duración: " + duration + " segundos");
+      
+      if (duration <= 3) {
+        console.log("⏩ Video muy corto, redirigiendo en 0.5 segundos...");
+        setTimeout(() => forceRedirectToForm(), 500);
+      } else {
+        const redirectDelay = (duration - 3) * 1000;
+        console.log(`⏰ Se redirigirá en ${redirectDelay/1000} segundos (3 seg antes del final)`);
+        redirectTimeout = setTimeout(() => {
+          console.log("🚀 Redirigiendo por timeout (3 seg antes del final)");
+          forceRedirectToForm();
+        }, redirectDelay);
+      }
     }
+    
     if (event.data === YT.PlayerState.ENDED && !redirectExecuted) {
+      console.log("🏁 Video terminado, redirigiendo...");
       forceRedirectToForm();
     }
-  }
-
-  function startCheckTimeRemaining() {
-    if (timerCheck) clearInterval(timerCheck);
-    timerCheck = setInterval(function() {
-      if (!player || redirectExecuted) return;
-      const duration = player.getDuration();
-      const current = player.getCurrentTime();
-      if (duration && current >= 0 && (duration - current) <= 3.0 && !redirectExecuted) {
-        redirectExecuted = true;
-        clearInterval(timerCheck);
-        forceRedirectToForm();
-      }
-    }, 200);
+    
+    if (event.data === YT.PlayerState.PAUSED) {
+      console.log("⏸️ Video pausado. La redirección seguirá activa.");
+      // Si quieres que al pausar se cancele, descomenta la línea:
+      // if (redirectTimeout) clearTimeout(redirectTimeout);
+    }
   }
 
   function forceRedirectToForm() {
     if (!redirectExecuted) {
       redirectExecuted = true;
-      if (timerCheck) clearInterval(timerCheck);
+      if (redirectTimeout) clearTimeout(redirectTimeout);
+      console.log("🔁 Redirigiendo a: " + GOOGLE_FORM_URL);
       window.location.href = GOOGLE_FORM_URL;
     }
   }

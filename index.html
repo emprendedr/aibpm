@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Pre-lanzamiento | Equipo de Élite</title>
+  <title>Pre-lanzamiento | Equipo AIViralJobs</title>
   <style>
     * {
       margin: 0;
@@ -182,43 +182,49 @@
       text-align: center;
       font-weight: 500;
     }
-    .btn-register {
-      display: block;
-      width: 100%;
-      background: linear-gradient(95deg, #FF8800, #FF5500);
-      border: none;
-      padding: 1.2rem 1.5rem;
-      font-size: 1.6rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: white;
-      border-radius: 60px;
-      cursor: pointer;
-      transition: 0.2s;
+
+    /* ESTILOS DEL NUEVO BOTÓN FUTURISTA */
+    .cta-wrapper {
       text-align: center;
-      text-decoration: none;
-      font-family: inherit;
+      margin: 2rem 0 1rem;
+    }
+    .cta-futurista {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      padding: 22px 60px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #000000 0%, #FFD700 50%, #FF0000 100%);
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 500px;
       letter-spacing: 1px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
-      margin-top: 1rem;
     }
-    .btn-register:hover {
+    .cta-futurista:hover {
       transform: scale(1.02);
-      background: linear-gradient(95deg, #FFaa33, #FF7722);
-      box-shadow: 0 12px 22px black;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
     }
+    /* Fin botón futurista */
+
     .fine-print {
       text-align: center;
       font-size: 0.7rem;
       color: #aaa;
       margin-top: 2rem;
     }
+    .fine-print strong {
+      color: #FFB347;
+    }
 
     @media (max-width: 780px) {
       .container { padding: 1rem; }
       .prelaunch-title h1 { font-size: 1.8rem; }
       .time-number { font-size: 1.6rem; }
-      .btn-register { font-size: 1.3rem; }
+      .cta-futurista { font-size: 1.2rem; padding: 15px 30px; max-width: 90%; }
     }
   </style>
 </head>
@@ -255,18 +261,29 @@
     <div class="card-highlight">
       <div class="sub-badge">🔥 OFERTA PRE-LANZAMIENTO 🔥</div>
       <h3>💰 TE CONSTRUIMOS TU DOWNLINE ANTES DE PAGAR</h3>
-      <p style="color:#E0E0E0; margin: 0.8rem 0;">Trabajamos en equipos de 5 personas. Cada miembro arrastra su red, ¡y tú recibes beneficio inmediato!</p>
+      <p style="color:#E0E0E0; margin: 0.8rem 0;">Trabajamos en <strong style="color:#FFB347">equipos de 2 personas</strong>. Cada miembro arrastra su red, ¡y tú recibes beneficio inmediato!</p>
       <div class="feature-list">
         <div class="feature">✅ Cupo limitado por equipo</div>
         <div class="feature">✅ Sin pago inicial</div>
         <div class="feature">✅ Tu downline crece gratis</div>
       </div>
-      <a href="https://bulletproofmatrix.com/Jobs" class="btn-register" id="registerBtn">🎯 RECLAMA TU SPOT GRATIS →</a>
-      <p style="font-size: 0.8rem; text-align: center; margin-top: 0.8rem;">*Plazas asignadas por orden de llegada. Solo 5 por escuadrón.</p>
+      
+      <!-- NUEVO BOTÓN SUSTITUIDO -->
+      <div class="cta-wrapper">
+        <a href="https://forms.gle/59QxZWKhCWRUjL9D7" target="_blank">
+          <button class="cta-futurista">
+            ¡Asegura mi Lugar Ahora!
+          </button>
+        </a>
+      </div>
+      <!-- FIN BOTÓN -->
+
+      <p style="font-size: 0.8rem; text-align: center; margin-top: 0.8rem;">*Plazas asignadas por orden de llegada. Solo 2 por escuadrón.</p>
     </div>
   </div>
   <div class="fine-print">
-    © 2026 · Equipo Elite · Sin compromiso. Construimos tu downline previo a cualquier inversión.
+    © 2026 · Equipo Elite · Sin compromiso. Construimos tu downline previo a cualquier inversión.<br>
+    <strong>equipo aiviraljobs</strong>
   </div>
 </div>
 
@@ -280,13 +297,11 @@
       const distance = targetDate - now;
 
       if (distance <= 0) {
-        // cuando se alcanza la fecha
         document.getElementById('days').innerText = '00';
         document.getElementById('hours').innerText = '00';
         document.getElementById('minutes').innerText = '00';
         document.getElementById('seconds').innerText = '00';
         clearInterval(countdownInterval);
-        // opcional: mostrar mensaje "YA ACTIVADO"
         const msgDiv = document.querySelector('.launch-message');
         if(msgDiv) msgDiv.innerHTML = '🎉 ¡YA ESTAMOS ACTIVOS! RELLENA TU SPOT YA 🎉';
         return;
@@ -311,17 +326,16 @@
 
   // 2. YouTube API: cargar video + redirigir 3 segundos antes de terminar
   let player;
-  let redirectExecuted = false;   // evitar doble redirección
-  let timerCheck;                 // guardar intervalo
+  let redirectExecuted = false;
+  let timerCheck;
 
-  // Esta función es llamada automáticamente cuando la API de YouTube está lista
   window.onYouTubeIframeAPIReady = function() {
     player = new YT.Player('youtube-player', {
-      videoId: 'MklM-yVofWc',      // ID del video de presentación
+      videoId: 'MklM-yVofWc',
       width: '100%',
       height: '100%',
       playerVars: {
-        'autoplay': 0,             // (opcional) se puede cambiar a 1 si deseas autoplay
+        'autoplay': 0,
         'modestbranding': 1,
         'rel': 0,
         'controls': 1,
@@ -339,11 +353,9 @@
   }
 
   function onPlayerStateChange(event) {
-    // Cuando el video está en reproducción, activamos monitoreo de tiempo
     if (event.data === YT.PlayerState.PLAYING) {
       startCheckTimeRemaining();
     }
-    // Si el video termina (ENDED) y por alguna razón no se hizo la redirección, la forzamos
     if (event.data === YT.PlayerState.ENDED && !redirectExecuted) {
       forceRedirect();
     }
@@ -353,17 +365,14 @@
     if (timerCheck) clearInterval(timerCheck);
     timerCheck = setInterval(function() {
       if (!player || redirectExecuted) return;
-      const duration = player.getDuration();       // duración total en segundos
-      const current = player.getCurrentTime();    // tiempo actual
-
+      const duration = player.getDuration();
+      const current = player.getCurrentTime();
       if (duration && current >= 0 && (duration - current) <= 3.0 && !redirectExecuted) {
-        // Faltan 3 segundos o menos para terminar
         redirectExecuted = true;
         clearInterval(timerCheck);
-        // Redirigir al enlace de registro https://bulletproofmatrix.com/Jobs
         window.location.href = 'https://bulletproofmatrix.com/Jobs';
       }
-    }, 200); // se revisa cada 200ms para ser preciso
+    }, 200);
   }
 
   function forceRedirect() {
@@ -374,7 +383,6 @@
     }
   }
 
-  // Cargar la API de YouTube de forma asíncrona
   function loadYouTubeAPI() {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -383,14 +391,6 @@
   }
 
   loadYouTubeAPI();
-
-  // (Opcional) También forzamos que si el usuario intenta dar click al botón, no haya conflicto,
-  // pero el comportamiento principal es redirigir automático al final del video.
-  // Además agregamos protección para que si el video no carga o hay error, igual redirigir tras X tiempo ? opcional
-  // pero para no complicar, la redirección por falta de API no interfiere.
-
-  // Por si el script tarda o hay algún error, aseguramos que el botón sí lleva al link.
-  // El botón ya tiene href directo, no hay necesidad adicional.
 </script>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Pre-lanzamiento | Equipo AIViralJobs</title>
+  <title>Pre-lanzamiento | aiviraljobs</title>
   <style>
     * {
       margin: 0;
@@ -169,9 +169,6 @@
       color: #aaa;
       margin-top: 2rem;
     }
-    .fine-print strong {
-      color: #FFB347;
-    }
 
     /* BOTÓN GAMING FIJO (FLOTANTE) */
     .cta-gaming {
@@ -261,9 +258,10 @@
       <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem;">*Plazas asignadas por orden de llegada. Solo 2 por escuadrón.</p>
     </div>
   </div>
+
+  <!-- PIE DE PÁGINA ACTUALIZADO con el nuevo texto -->
   <div class="fine-print">
-    © 2026 · Equipo Elite · Sin compromiso. Construimos tu downline previo a cualquier inversión.<br>
-    <strong>equipo aiviraljobs</strong>
+    © 2026 · aiviraljobs · Por tiempo de prelanzamiento te ayudamos a crear tu equipo antes de activarte
   </div>
 </div>
 
@@ -311,7 +309,7 @@
 
   startCountdown();
 
-  // 2. YouTube API: redirige al FORMULARIO DE GOOGLE (mismo destino del botón animado)
+  // 2. YouTube API: redirige al FORMULARIO DE GOOGLE
   let player;
   let redirectExecuted = false;
   let timerCheck;
@@ -367,7 +365,6 @@
     if (!redirectExecuted) {
       redirectExecuted = true;
       if (timerCheck) clearInterval(timerCheck);
-      // Redirige al formulario de Google (mismo destino que el botón animado)
       window.location.href = GOOGLE_FORM_URL;
     }
   }

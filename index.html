@@ -18,7 +18,6 @@
       padding: 2rem 1rem;
     }
 
-    /* Contenedor principal */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -30,7 +29,6 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Título principal */
     .prelaunch-title {
       text-align: center;
       margin-bottom: 2rem;
@@ -56,7 +54,6 @@
       backdrop-filter: blur(4px);
     }
 
-    /* contenedor video + contador */
     .video-countdown-wrapper {
       display: flex;
       flex-wrap: wrap;
@@ -80,7 +77,6 @@
       border: none;
     }
 
-    /* tarjeta contador */
     .countdown-card {
       flex: 1.2;
       background: rgba(10, 20, 30, 0.7);
@@ -140,7 +136,6 @@
       font-size: 0.9rem;
     }
 
-    /* Área de beneficios (sin check marks) */
     .benefits {
       margin: 2rem 0 1rem;
     }
@@ -167,7 +162,6 @@
       color: #fff;
       margin-bottom: 1rem;
     }
-    /* Eliminada la sección .feature-list y .feature */
 
     .fine-print {
       text-align: center;
@@ -241,12 +235,10 @@
   </div>
 
   <div class="video-countdown-wrapper">
-    <!-- Video de YouTube con redirección automática (3 segundos antes del final) -->
     <div class="video-box">
       <div id="youtube-player"></div>
     </div>
 
-    <!-- Contador interactivo -->
     <div class="countdown-card">
       <div class="countdown-label">⏳ LANZAMIENTO EN ⏳</div>
       <div class="timer">
@@ -266,9 +258,6 @@
       <div class="sub-badge">🔥 OFERTA PRE-LANZAMIENTO 🔥</div>
       <h3>💰 TE CONSTRUIMOS TU DOWNLINE ANTES DE PAGAR</h3>
       <p style="color:#E0E0E0; margin: 0.8rem 0;">Trabajamos en <strong style="color:#FFB347">equipos de 2 personas</strong>. Cada miembro arrastra su red, ¡y tú recibes beneficio inmediato!</p>
-      
-      <!-- Eliminadas las 3 viñetas con check marks -->
-      
       <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem;">*Plazas asignadas por orden de llegada. Solo 2 por escuadrón.</p>
     </div>
   </div>
@@ -278,7 +267,7 @@
   </div>
 </div>
 
-<!-- Botón flotante fijo (fuera del container) -->
+<!-- Botón flotante con enlace al formulario de Google -->
 <a href="https://forms.gle/59QxZWKhCWRUjL9D7" target="_blank" style="text-decoration:none;">
   <div class="cta-gaming">
     ¡Asegura mi Lugar Ahora!
@@ -286,7 +275,7 @@
 </a>
 
 <script>
-  // 1. CONTADOR REGRESIVO: 29 de Mayo 2026 (medianoche zona horaria local)
+  // 1. CONTADOR REGRESIVO: 29 de Mayo 2026
   function startCountdown() {
     const targetDate = new Date('May 29, 2026 00:00:00').getTime();
 
@@ -322,10 +311,11 @@
 
   startCountdown();
 
-  // 2. YouTube API: cargar video + redirigir 3 segundos antes de terminar
+  // 2. YouTube API: redirige al FORMULARIO DE GOOGLE (mismo destino del botón animado)
   let player;
   let redirectExecuted = false;
   let timerCheck;
+  const GOOGLE_FORM_URL = 'https://forms.gle/59QxZWKhCWRUjL9D7';
 
   window.onYouTubeIframeAPIReady = function() {
     player = new YT.Player('youtube-player', {
@@ -355,7 +345,7 @@
       startCheckTimeRemaining();
     }
     if (event.data === YT.PlayerState.ENDED && !redirectExecuted) {
-      forceRedirect();
+      forceRedirectToForm();
     }
   }
 
@@ -368,16 +358,17 @@
       if (duration && current >= 0 && (duration - current) <= 3.0 && !redirectExecuted) {
         redirectExecuted = true;
         clearInterval(timerCheck);
-        window.location.href = 'https://bulletproofmatrix.com/Jobs';
+        forceRedirectToForm();
       }
     }, 200);
   }
 
-  function forceRedirect() {
+  function forceRedirectToForm() {
     if (!redirectExecuted) {
       redirectExecuted = true;
       if (timerCheck) clearInterval(timerCheck);
-      window.location.href = 'https://bulletproofmatrix.com/Jobs';
+      // Redirige al formulario de Google (mismo destino que el botón animado)
+      window.location.href = GOOGLE_FORM_URL;
     }
   }
 

@@ -140,9 +140,9 @@
       font-size: 0.9rem;
     }
 
-    /* Área de beneficios + CTA */
+    /* Área de beneficios (sin check marks) */
     .benefits {
-      margin: 2rem 0 2rem;
+      margin: 2rem 0 1rem;
     }
     .card-highlight {
       background: linear-gradient(145deg, rgba(20,30,45,0.9), rgba(0,0,0,0.6));
@@ -167,48 +167,7 @@
       color: #fff;
       margin-bottom: 1rem;
     }
-    .feature-list {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 1.5rem 0;
-    }
-    .feature {
-      flex: 1;
-      background: rgba(0,0,0,0.4);
-      padding: 0.8rem;
-      border-radius: 1.2rem;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    /* ESTILOS DEL NUEVO BOTÓN FUTURISTA */
-    .cta-wrapper {
-      text-align: center;
-      margin: 2rem 0 1rem;
-    }
-    .cta-futurista {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #fff;
-      padding: 22px 60px;
-      border-radius: 20px;
-      background: linear-gradient(90deg, #000000 0%, #FFD700 50%, #FF0000 100%);
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      max-width: 500px;
-      letter-spacing: 1px;
-    }
-    .cta-futurista:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
-    }
-    /* Fin botón futurista */
+    /* Eliminada la sección .feature-list y .feature */
 
     .fine-print {
       text-align: center;
@@ -220,11 +179,56 @@
       color: #FFB347;
     }
 
+    /* BOTÓN GAMING FIJO (FLOTANTE) */
+    .cta-gaming {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 9999;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      padding: 18px 40px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, #000000 0%, #FFD700 50%, #FF0000 100%);
+      cursor: pointer;
+      animation: latido 1.4s infinite ease-in-out, sombraPulsante 2.2s infinite ease-in-out;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+      text-align: center;
+      backdrop-filter: blur(2px);
+    }
+
+    @keyframes latido {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.08); }
+      50% { transform: scale(1); }
+      70% { transform: scale(1.06); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes sombraPulsante {
+      0% { box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
+      50% { box-shadow: 0 0 55px rgba(255, 0, 0, 0.9); }
+      100% { box-shadow: 0 0 25px rgba(255, 0, 0, 0.5); }
+    }
+
+    .cta-gaming:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 65px rgba(255, 215, 0, 1);
+    }
+
     @media (max-width: 780px) {
       .container { padding: 1rem; }
       .prelaunch-title h1 { font-size: 1.8rem; }
       .time-number { font-size: 1.6rem; }
-      .cta-futurista { font-size: 1.2rem; padding: 15px 30px; max-width: 90%; }
+      .cta-gaming {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+        bottom: 15px;
+        right: 15px;
+      }
     }
   </style>
 </head>
@@ -262,23 +266,10 @@
       <div class="sub-badge">🔥 OFERTA PRE-LANZAMIENTO 🔥</div>
       <h3>💰 TE CONSTRUIMOS TU DOWNLINE ANTES DE PAGAR</h3>
       <p style="color:#E0E0E0; margin: 0.8rem 0;">Trabajamos en <strong style="color:#FFB347">equipos de 2 personas</strong>. Cada miembro arrastra su red, ¡y tú recibes beneficio inmediato!</p>
-      <div class="feature-list">
-        <div class="feature">✅ Cupo limitado por equipo</div>
-        <div class="feature">✅ Sin pago inicial</div>
-        <div class="feature">✅ Tu downline crece gratis</div>
-      </div>
       
-      <!-- NUEVO BOTÓN SUSTITUIDO -->
-      <div class="cta-wrapper">
-        <a href="https://forms.gle/59QxZWKhCWRUjL9D7" target="_blank">
-          <button class="cta-futurista">
-            ¡Asegura mi Lugar Ahora!
-          </button>
-        </a>
-      </div>
-      <!-- FIN BOTÓN -->
-
-      <p style="font-size: 0.8rem; text-align: center; margin-top: 0.8rem;">*Plazas asignadas por orden de llegada. Solo 2 por escuadrón.</p>
+      <!-- Eliminadas las 3 viñetas con check marks -->
+      
+      <p style="font-size: 0.8rem; text-align: center; margin-top: 1rem;">*Plazas asignadas por orden de llegada. Solo 2 por escuadrón.</p>
     </div>
   </div>
   <div class="fine-print">
@@ -286,6 +277,13 @@
     <strong>equipo aiviraljobs</strong>
   </div>
 </div>
+
+<!-- Botón flotante fijo (fuera del container) -->
+<a href="https://forms.gle/59QxZWKhCWRUjL9D7" target="_blank" style="text-decoration:none;">
+  <div class="cta-gaming">
+    ¡Asegura mi Lugar Ahora!
+  </div>
+</a>
 
 <script>
   // 1. CONTADOR REGRESIVO: 29 de Mayo 2026 (medianoche zona horaria local)
